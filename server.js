@@ -23,14 +23,25 @@ app.get("/uniqlo", function(req, res){
             let item = {}
 
             item.name = $(element).find("div.product-name").text().replace(/(\r\n|\n|\r)/gm,"");
-            // item.name = item.name
+            
+            //regular price
+            item.regprice = $(element).find("span.product-standard-price").text()
 
+            //sales price
+            item.salesprice = $(element).find("span.product-sales-price").text()
+
+            //link
+            item.link = $(element).find("div.product-image").children("a").attr("href")
+
+            //image
+            item.image = $(element).find("div.product-image").children("a").children("img").attr("src")
             // result.link = $(element).find(".title").children().attr("href");
             // result.description = $(element).find("div.text").text();
             // result.image = $(element).children("a").find(".image").attr("src");
             result[i] = item
         
         })
+        console.log("Success")
         res.json(result)
     })
 })
