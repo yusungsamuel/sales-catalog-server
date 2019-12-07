@@ -17,7 +17,7 @@ app.get("/uniqlo", function(req, res){
     axios.get("https://www.uniqlo.com/us/en/men/sale").then(function(response){
         
         const $ = cheerio.load(response.data);
-        let result = {}
+        let result = []
 
         $("div.product-tile-info").each(function(i, element){
             let item = {}
@@ -38,7 +38,7 @@ app.get("/uniqlo", function(req, res){
             // result.link = $(element).find(".title").children().attr("href");
             // result.description = $(element).find("div.text").text();
             // result.image = $(element).children("a").find(".image").attr("src");
-            result[i] = item
+            result.push(item)
         
         })
         console.log("Success")
