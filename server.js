@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 
 const app = express();
@@ -13,6 +13,11 @@ app.use(express.json());
 
 
 //scrape request
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+  
 app.get("/uniqlo", function(req, res){
     axios.get("https://www.uniqlo.com/us/en/men/sale").then(function(response){
         
