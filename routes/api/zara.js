@@ -4,18 +4,19 @@ const cheerio = require("cheerio");
 
 router.route("/")
     .get(
-        function (req, res) {
-            axios.get("https://www.zara.com/us/en/man-special-prices-l806.html").then(function (response) {
+        async function (req, res) {
+            let response = await axios.get("https://www.zara.com/us/en/man-special-prices-l806.html")
 
-                const $ = cheerio.load(response.data);
-                let result = []
+            const $ = cheerio.load(response.data);
+            let result = []
 
-                $("li._product").each(function (i, element) {
-                    let item = {}
-                    
-                    //item name
-                    item.name = $(element).find("div.product-info").children(".product-info-item-name").text()
+            $("li._product").each(function (i, element) {
+                let item = {}
 
+                //item name
+                item.name = $(element).find("div.product-info").children(".product-info-item-name").text()
+
+                if (item.name.length > 1) {
                     //regular price
                     // item.regprice = $(element).find("span.product-standard-price").text()
 
@@ -25,15 +26,25 @@ router.route("/")
                     //link
                     item.link = $(element).find("a.item").attr("href")
 
-                    //image
-                    item.image = $(element).find("a.item").children("div.product-grid-xmedia").children("img.product-media").attr("src")
-                    
                     result.push(item)
+                }
 
-                })
-                console.log("Success")
-                res.json(result)
+
+            });
+            let promise = []
+            result.forEach((r) => {
+                promise.push(axios.get(r.link))
             })
+            let resources = await Promise.all(promise)
+            resources.forEach((resource, i) => {
+                let $$ = cheerio.load(resource.data)
+                console.log($$("a._seoImg").attr("href"))
+                result[i].image = $$("a._seoImg").attr("href")
+            })
+
+            console.log("Success")
+            res.json(result)
+
         }
     )
 
