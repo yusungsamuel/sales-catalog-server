@@ -14,6 +14,8 @@ router.route("/")
                     let item = {}
 
                     item.name = $(element).find("div.product-name").text().replace(/(\r\n|\n|\r)/gm, "");
+                    
+                    item.brand = "UNIQLO"
 
                     //regular price
                     item.regprice = $(element).find("span.product-standard-price").text()

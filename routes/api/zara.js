@@ -13,6 +13,8 @@ router.route("/")
             $("li._product").each(function (i, element) {
                 let item = {}
 
+                item.brand = "ZARA"
+
                 //item name
                 item.name = $(element).find("div.product-info").children(".product-info-item-name").text()
 
