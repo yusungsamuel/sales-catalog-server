@@ -18,10 +18,10 @@ router.route("/")
 
                 if (item.name.length > 1) {
                     //regular price
-                    // item.regprice = $(element).find("span.product-standard-price").text()
-
+                    item.regprice =  $(element).children("div.product-info").find($("span.line-through")).data("price")
+                    
                     //sales price
-                    // item.salesprice = $(element).find("span.product-sales-price").text()
+                    item.salesprice = $(element).children("div.product-info").find($("span.sale")).data("price")
 
                     //link
                     item.link = $(element).find("a.item").attr("href")
@@ -38,7 +38,7 @@ router.route("/")
             let resources = await Promise.all(promise)
             resources.forEach((resource, i) => {
                 let $$ = cheerio.load(resource.data)
-                console.log($$("a._seoImg").attr("href"))
+                // console.log($$("a._seoImg").attr("href"))
                 result[i].image = $$("a._seoImg").attr("href")
             })
 
