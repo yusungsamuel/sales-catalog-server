@@ -18,19 +18,17 @@ router.route("/")
                     item.brand = "H&M"
 
                     //regular price
-                    // item.regprice = $(element).find("span.product-standard-price").text()
+                    item.regprice = $(element).find("span.regular").text()
 
                     //sales price
-                    // item.salesprice = $(element).find("span.product-sales-price").text()
+                    item.salesprice = $(element).find("span.sale").text()
 
                     //link
-                    // item.link = $(element).find("div.product-image").children("a").attr("href")
+                    item.link = $(element).find("a.link").attr("href")
 
                     //image
-                    // item.image = $(element).find("div.product-image").children("a").children("img").attr("src")
-                    // result.link = $(element).find(".title").children().attr("href");
-                    // result.description = $(element).find("div.text").text();
-                    // result.image = $(element).children("a").find(".image").attr("src");
+                    item.image = $(element).find("img.item-image").attr("src")
+                    
                     result.push(item)
 
                 })
