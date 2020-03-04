@@ -27,7 +27,7 @@ router.route("/")
                     item.link = $(element).find("a.link").attr("href")
 
                     //image
-                    item.image = $(element).find("img.item-image").attr("src")
+                    item.image = $(element).find("img.item-image").data("altimage")
                     
                     result.push(item)
 
