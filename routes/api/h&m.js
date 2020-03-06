@@ -5,7 +5,7 @@ const cheerio = require("cheerio");
 router.route("/")
     .get(
         function (req, res) {
-            axios.get("https://www2.hm.com/en_us/sale/men/view-all.html?sort=stock&image-size=small&image=stillLife&offset=0&page-size=75").then(function (response) {
+            axios.get("https://www2.hm.com/en_us/sale/men/view-all.html?sort=stock&image-size=small&image=stillLife&offset=0&page-size=50").then(function (response) {
 
                 const $ = cheerio.load(response.data);
                 let result = []
