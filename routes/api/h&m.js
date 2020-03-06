@@ -24,7 +24,7 @@ router.route("/")
                     item.salesprice = $(element).find("span.sale").text()
 
                     //link
-                    item.link = $(element).find("a.link").attr("href")
+                    item.link = "https://www2.hm.com/" + $(element).find("a.link").attr("href")
 
                     //image
                     item.image = $(element).find("img.item-image").data("altimage")

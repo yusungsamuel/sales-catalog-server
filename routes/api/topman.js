@@ -24,7 +24,7 @@ router.route("/")
                     item.salesprice = $(element).find("span.HistoricalPrice-promotion").children("span.Price").text()
 
                     //link
-                    item.link = $(element).find("a.Product-link").attr("href")
+                    item.link = "https://us.topman.com/" + $(element).find("a.Product-link").attr("href")
 
                     //image
                     item.image = $(element).find("img.ProductImages-image").attr("src")
